@@ -28,11 +28,8 @@ const enhancer = (createStore) => (...args) => {
 
 const store = createStore( 
                     combineReducers({heroes, filters}), 
-                    applyMiddleware(stringMiddleware)
-                    // compose(
-                    //     enhancer,
-                    //     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-                    // )
+                    compose(applyMiddleware(stringMiddleware),
+                            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
                     );
 
 export default store;
