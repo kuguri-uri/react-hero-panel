@@ -13,12 +13,6 @@
       "element": "fire"
     },
     {
-      "id": "7e7fe2d4-733a-41c9-8eb9-e2d34e346106",
-      "name": "в",
-      "description": "п",
-      "element": "water"
-    },
-    {
       "id": "fbf640b9-f779-4d68-9841-612b5184bd39",
       "name": "биба",
       "description": "говно кидает ",
@@ -29,6 +23,12 @@
       "name": "анемо чел",
       "description": "анимешник ",
       "element": "wind"
+    },
+    {
+      "id": "61cc4f22-e0ea-424a-a61a-7ae216e7e520",
+      "name": "гг",
+      "description": "вп",
+      "element": "water"
     }
   ],
   "filters": [
