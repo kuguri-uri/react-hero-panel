@@ -1,9 +1,9 @@
 import {useHttp} from '../../hooks/http.hook';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
-import { heroDeleted, fetchHeroes, filteredHeroesSelector } from './heroesSlice';
+import { heroDeleted, fetchHeroes } from './heroesSlice';
 import { useGetHeroesQuery } from '../../api/apiSlice';
 
 import HeroesListItem from "../heroesListItem/HeroesListItem";
@@ -13,15 +13,22 @@ const HeroesList = () => {
 
     const {
         data: heroes = [],
-        isFetching,
         isLoading,
-        isSuccess,
         isError,
-        error
     } = useGetHeroesQuery();
 
-    const filteredHeroes = useSelector(filteredHeroesSelector);
-    const heroesLoadingStatus = useSelector(state => state.heroes.heroesLoadingStatus);
+    const activeFilter = useSelector(state => state.filters.activeFilter);
+
+    const filteredHeroes = useMemo(() => {
+        const filteredHeroes = heroes.slice();
+
+        if (activeFilter === 'all') {
+            return filteredHeroes;
+        } else {
+            return filteredHeroes.filter(item => item.element === filter);
+        }
+    }, [heroes]);
+
     const dispatch = useDispatch();
     const {request} = useHttp();
 
@@ -57,7 +64,7 @@ const HeroesList = () => {
         })
     }
 
-    const elements = renderHeroesList(heroes);
+    const elements = renderHeroesList(filteredHeroes);
     return (
         <ul>
             {elements}
